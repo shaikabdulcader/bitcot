@@ -9,6 +9,8 @@ export const ContactProvider = ({ children }) => {
         { id: 3, name: "Hanna Donovan", email: "hanna@example.com", phone: "6365425254", address: "789 Pine St" }
     ]);
 
+    const [searchQuery, setSearchQuery] = useState("");
+
     const addContact = (contact) => setContacts([...contacts, { ...contact, id: contacts.length + 1 }]);
 
     const updateContact = (updatedContact) => {
@@ -17,8 +19,17 @@ export const ContactProvider = ({ children }) => {
 
     const deleteContact = (id) => setContacts(contacts.filter(contact => contact.id !== id));
 
+    const filterContacts = () => {
+        if (!searchQuery) {
+            return contacts;
+        }
+        return contacts.filter(contact =>
+            contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+    };
+
     return (
-        <ContactContext.Provider value={{ contacts, addContact, updateContact, deleteContact }}>
+        <ContactContext.Provider value={{ contacts, addContact, updateContact, deleteContact, filterContacts, setSearchQuery }}>
             {children}
         </ContactContext.Provider>
     );

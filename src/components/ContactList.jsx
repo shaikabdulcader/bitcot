@@ -3,14 +3,26 @@ import { ContactContext } from '../context/ContactContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+
 const ContactList = ({ onEdit, onView }) => {
-    const { contacts, deleteContact } = useContext(ContactContext);
+    const { contacts, deleteContact, filterContacts, setSearchQuery } = useContext(ContactContext);
+
+    // Handle search query change
+    const handleSearchChange = (e) => {
+        setSearchQuery(e.target.value);
+    };
 
     return (
         <div className="container">
             <h3 className="text-center">All Contacts</h3>
+            <input
+                type="text"
+                placeholder="Search by name"
+                onChange={handleSearchChange}
+                className="form-control my-2"
+            />
             <div className="list-group">
-                {contacts.map(contact => (
+                {filterContacts().map(contact => (
                     <div key={contact.id} className="list-group-item d-flex justify-content-between align-items-center">
                         <span>
                             <strong>{contact.id}. {contact.name}</strong><br />
