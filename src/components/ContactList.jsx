@@ -17,7 +17,7 @@ const ContactList = ({ onEdit, onView }) => {
             <h3 className="text-center">All Contacts</h3>
             <input
                 type="text"
-                placeholder="Search by name"
+                placeholder="Search by name or contact number"
                 onChange={handleSearchChange}
                 className="form-control my-2"
             />

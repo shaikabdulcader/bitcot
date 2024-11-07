@@ -24,7 +24,8 @@ export const ContactProvider = ({ children }) => {
             return contacts;
         }
         return contacts.filter(contact =>
-            contact.name.toLowerCase().includes(searchQuery.toLowerCase())
+            contact.name.toLowerCase().includes(searchQuery.toLowerCase())||
+            contact.phone.includes(searchQuery)
         );
     };
 
